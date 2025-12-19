@@ -1,0 +1,479 @@
+---
+title: "Automation"
+description: "Control Dayflow with URL schemes and Shortcuts"
+---
+
+## Overview
+
+Dayflow supports URL schemes that let you control recording from external tools like Shortcuts, hotkey launchers, or scripts. This enables powerful automation workflows.
+
+## URL schemes
+
+Dayflow registers the `dayflow://` URL scheme for triggering actions.
+
+### Available URLs
+
+<CardGroup cols={2}>
+  <Card title="Start recording" icon="play">
+    `dayflow://start-recording`
+    
+    Enables screen capture (no-op if already recording)
+  </Card>
+  <Card title="Stop recording" icon="stop">
+    `dayflow://stop-recording`
+    
+    Pauses screen capture (no-op if already paused)
+  </Card>
+</CardGroup>
+
+### Testing from Terminal
+
+You can test URL schemes directly from Terminal:
+
+```bash
+# Start recording
+open dayflow://start-recording
+
+# Stop recording
+open dayflow://stop-recording
+```
+
+<Tip>
+  These commands are useful for testing before building more complex automations.
+</Tip>
+
+## Shortcuts integration
+
+Use Apple Shortcuts to create powerful automation workflows.
+
+### Basic examples
+
+<Tabs>
+  <Tab title="Start work session">
+    Create a shortcut that starts recording when you begin work:
+    
+    1. Open **Shortcuts** app
+    2. Create new shortcut
+    3. Add **Open URLs** action
+    4. Set URL to `dayflow://start-recording`
+    5. Name it "Start Work"
+    
+    **Bonus**: Add actions to:
+    - Set Focus mode to "Work"
+    - Open your work apps
+    - Start a timer
+  </Tab>
+  
+  <Tab title="End work session">
+    Create a shortcut that stops recording when you finish work:
+    
+    1. Open **Shortcuts** app
+    2. Create new shortcut
+    3. Add **Open URLs** action
+    4. Set URL to `dayflow://stop-recording`
+    5. Name it "End Work"
+    
+    **Bonus**: Add actions to:
+    - Disable Focus mode
+    - Close work apps
+    - Show daily summary
+  </Tab>
+  
+  <Tab title="Lunch break">
+    Automatically pause recording during lunch:
+    
+    1. Create shortcut with **Open URLs** action
+    2. Set URL to `dayflow://stop-recording`
+    3. Add **Wait** action for 1 hour
+    4. Add another **Open URLs** action
+    5. Set URL to `dayflow://start-recording`
+    6. Name it "Lunch Break"
+  </Tab>
+  
+  <Tab title="Focus mode toggle">
+    Toggle recording based on Focus mode:
+    
+    **When Focus mode starts**:
+    1. Create automation in Shortcuts
+    2. Trigger: When Focus mode turns on
+    3. Action: Open `dayflow://start-recording`
+    
+    **When Focus mode ends**:
+    1. Create automation in Shortcuts
+    2. Trigger: When Focus mode turns off
+    3. Action: Open `dayflow://stop-recording`
+  </Tab>
+</Tabs>
+
+### Advanced workflows
+
+<AccordionGroup>
+  <Accordion title="Time-based recording">
+    Automatically start and stop recording at specific times:
+    
+    **Morning start (9 AM)**:
+    1. Create automation in Shortcuts
+    2. Trigger: Time of Day (9:00 AM, weekdays)
+    3. Action: Open `dayflow://start-recording`
+    
+    **Evening stop (6 PM)**:
+    1. Create automation in Shortcuts
+    2. Trigger: Time of Day (6:00 PM, weekdays)
+    3. Action: Open `dayflow://stop-recording`
+  </Accordion>
+  
+  <Accordion title="Location-based recording">
+    Start recording when you arrive at work:
+    
+    1. Create automation in Shortcuts
+    2. Trigger: When I arrive at [Work location]
+    3. Action: Open `dayflow://start-recording`
+    
+    Stop recording when you leave:
+    
+    1. Create automation in Shortcuts
+    2. Trigger: When I leave [Work location]
+    3. Action: Open `dayflow://stop-recording`
+  </Accordion>
+  
+  <Accordion title="Calendar integration">
+    Start recording during calendar events:
+    
+    1. Create automation in Shortcuts
+    2. Trigger: When calendar event starts (filter by calendar)
+    3. Action: Open `dayflow://start-recording`
+    
+    Stop when event ends:
+    
+    1. Create automation in Shortcuts
+    2. Trigger: When calendar event ends
+    3. Action: Open `dayflow://stop-recording`
+  </Accordion>
+  
+  <Accordion title="App-based recording">
+    Start recording when specific apps open:
+    
+    1. Create automation in Shortcuts
+    2. Trigger: When app opens (e.g., Xcode, VS Code)
+    3. Action: Open `dayflow://start-recording`
+    
+    Stop when apps close:
+    
+    1. Create automation in Shortcuts
+    2. Trigger: When app closes
+    3. Action: Open `dayflow://stop-recording`
+  </Accordion>
+</AccordionGroup>
+
+## Keyboard launcher integration
+
+Integrate with keyboard launchers like Raycast or Alfred.
+
+### Raycast
+
+Create custom commands in Raycast:
+
+<Steps>
+  <Step title="Create script command">
+    1. Open Raycast
+    2. Go to **Extensions → Script Commands**
+    3. Create new script command
+  </Step>
+  
+  <Step title="Start recording script">
+    ```bash
+    #!/bin/bash
+    
+    # Required parameters:
+    # @raycast.schemaVersion 1
+    # @raycast.title Start Dayflow Recording
+    # @raycast.mode silent
+    
+    open dayflow://start-recording
+    ```
+  </Step>
+  
+  <Step title="Stop recording script">
+    ```bash
+    #!/bin/bash
+    
+    # Required parameters:
+    # @raycast.schemaVersion 1
+    # @raycast.title Stop Dayflow Recording
+    # @raycast.mode silent
+    
+    open dayflow://stop-recording
+    ```
+  </Step>
+  
+  <Step title="Assign hotkeys">
+    Assign keyboard shortcuts to each command in Raycast settings
+  </Step>
+</Steps>
+
+### Alfred
+
+Create workflows in Alfred:
+
+<Steps>
+  <Step title="Create workflow">
+    1. Open Alfred Preferences
+    2. Go to **Workflows** tab
+    3. Click **+** to create new workflow
+  </Step>
+  
+  <Step title="Add hotkey trigger">
+    1. Add **Hotkey** trigger
+    2. Set your preferred keyboard shortcut
+  </Step>
+  
+  <Step title="Add open URL action">
+    1. Add **Open URL** action
+    2. Set URL to `dayflow://start-recording` or `dayflow://stop-recording`
+  </Step>
+  
+  <Step title="Connect and save">
+    Connect the trigger to the action and save
+  </Step>
+</Steps>
+
+## Script integration
+
+Use URL schemes in your own scripts and automation tools.
+
+### Shell scripts
+
+```bash
+#!/bin/bash
+
+# Start recording
+start_dayflow() {
+    open dayflow://start-recording
+    echo "Dayflow recording started"
+}
+
+# Stop recording
+stop_dayflow() {
+    open dayflow://stop-recording
+    echo "Dayflow recording stopped"
+}
+
+# Toggle recording based on time
+if [ $(date +%H) -ge 9 ] && [ $(date +%H) -lt 18 ]; then
+    start_dayflow
+else
+    stop_dayflow
+fi
+```
+
+### Python scripts
+
+```python
+import subprocess
+import datetime
+
+def start_recording():
+    subprocess.run(['open', 'dayflow://start-recording'])
+    print("Dayflow recording started")
+
+def stop_recording():
+    subprocess.run(['open', 'dayflow://stop-recording'])
+    print("Dayflow recording stopped")
+
+# Toggle based on time
+current_hour = datetime.datetime.now().hour
+if 9 <= current_hour < 18:
+    start_recording()
+else:
+    stop_recording()
+```
+
+### AppleScript
+
+```applescript
+-- Start recording
+tell application "System Events"
+    open location "dayflow://start-recording"
+end tell
+
+-- Stop recording
+tell application "System Events"
+    open location "dayflow://stop-recording"
+end tell
+```
+
+## Analytics tracking
+
+Deeplink-triggered state changes are logged with `reason: "deeplink"` in analytics, so you can distinguish automations from manual toggles.
+
+This helps you understand:
+- How often you use automation vs manual control
+- Which automations are most effective
+- Patterns in your recording behavior
+
+## Best practices
+
+<CardGroup cols={2}>
+  <Card title="Test first" icon="flask">
+    Test URL schemes from Terminal before building complex automations
+  </Card>
+  <Card title="Handle errors" icon="triangle-exclamation">
+    URL schemes fail silently if Dayflow isn't running
+  </Card>
+  <Card title="Use Focus modes" icon="moon">
+    Combine with Focus modes for context-aware recording
+  </Card>
+  <Card title="Set up fallbacks" icon="shield">
+    Create manual shortcuts as backup for automation failures
+  </Card>
+  <Card title="Document workflows" icon="book">
+    Keep notes on your automation setup for future reference
+  </Card>
+  <Card title="Start simple" icon="seedling">
+    Begin with basic time-based automations before complex workflows
+  </Card>
+</CardGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="URL scheme doesn't work">
+    **Possible causes**:
+    - Dayflow isn't running (URL schemes require the app to be open)
+    - Typo in URL (check for `dayflow://` prefix)
+    - macOS security blocking the action
+    
+    **Solutions**:
+    - Ensure Dayflow is running
+    - Test from Terminal first: `open dayflow://start-recording`
+    - Check Console.app for error messages
+  </Accordion>
+  
+  <Accordion title="Shortcuts automation not triggering">
+    **Possible causes**:
+    - Automation disabled in Shortcuts settings
+    - Trigger conditions not met
+    - Shortcuts app needs permissions
+    
+    **Solutions**:
+    - Check **Settings → Shortcuts → Advanced** and enable automations
+    - Verify trigger conditions (time, location, etc.)
+    - Grant Shortcuts necessary permissions in System Settings
+  </Accordion>
+  
+  <Accordion title="Recording doesn't start/stop">
+    **Possible causes**:
+    - URL scheme executed but Dayflow already in that state
+    - Permissions not granted
+    - App in error state
+    
+    **Solutions**:
+    - Check current recording state in Dayflow
+    - Verify screen recording permission is granted
+    - Restart Dayflow if needed
+  </Accordion>
+  
+  <Accordion title="Raycast/Alfred commands not working">
+    **Possible causes**:
+    - Script not executable
+    - Incorrect script format
+    - Launcher doesn't have permissions
+    
+    **Solutions**:
+    - Make scripts executable: `chmod +x script.sh`
+    - Verify script syntax
+    - Grant launcher accessibility permissions in System Settings
+  </Accordion>
+</AccordionGroup>
+
+## Example workflows
+
+### Morning routine
+
+```bash
+#!/bin/bash
+# morning-routine.sh
+
+# Start Dayflow recording
+open dayflow://start-recording
+
+# Open work apps
+open -a "Visual Studio Code"
+open -a "Slack"
+open -a "Safari"
+
+# Set Focus mode
+shortcuts run "Work Focus"
+
+echo "Morning routine complete!"
+```
+
+### End of day
+
+```bash
+#!/bin/bash
+# end-of-day.sh
+
+# Stop Dayflow recording
+open dayflow://stop-recording
+
+# Close work apps
+osascript -e 'quit app "Visual Studio Code"'
+osascript -e 'quit app "Slack"'
+
+# Disable Focus mode
+shortcuts run "Disable Focus"
+
+echo "Work day ended!"
+```
+
+### Pomodoro timer
+
+```bash
+#!/bin/bash
+# pomodoro.sh
+
+# Work session (25 minutes)
+open dayflow://start-recording
+echo "Work session started (25 min)"
+sleep 1500  # 25 minutes
+
+# Break (5 minutes)
+open dayflow://stop-recording
+echo "Break time (5 min)"
+sleep 300  # 5 minutes
+
+# Repeat
+open dayflow://start-recording
+echo "Back to work!"
+```
+
+## Future enhancements
+
+Planned URL scheme additions:
+
+- `dayflow://open-journal` - Open journal view
+- `dayflow://export-timeline` - Export timeline
+- `dayflow://open-settings` - Open settings
+- `dayflow://show-today` - Show today's timeline
+
+<Note>
+  Have ideas for new URL schemes? [Open an issue](https://github.com/JerryZLiu/Dayflow/issues) on GitHub!
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Features" icon="sparkles" href="/features">
+    Explore all Dayflow features
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Get started with Dayflow
+  </Card>
+  <Card title="Privacy" icon="shield" href="/privacy">
+    Understand data handling
+  </Card>
+  <Card title="AI providers" icon="brain" href="/ai-providers">
+    Configure AI providers
+  </Card>
+</CardGroup>
