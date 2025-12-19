@@ -1,97 +1,122 @@
 ---
 title: "Introduction"
-description: "Welcome to the new home for your documentation"
+description: "A timeline of your day, automatically"
 ---
 
-## Setting up
+<img
+  src="https://raw.githubusercontent.com/JerryZLiu/dayflow/main/docs/images/dayflow_header.png"
+  alt="Dayflow"
+  width="400"
+/>
 
-Get your documentation site up and running in minutes.
+## What is Dayflow?
+
+Dayflow is a **native macOS app** that records your screen at **1 FPS**, analyzes it **every 15 minutes** with AI, and generates a **timeline** of your activities with summaries.
+
+It's lightweight (25MB app size) and uses ~100MB of RAM and <1% CPU.
+
+<img
+  src="https://raw.githubusercontent.com/JerryZLiu/dayflow/main/docs/images/hero_animation_1080p.gif"
+  alt="Dayflow in action"
+  width="800"
+/>
 
 <Card
-  title="Start here"
+  title="Download for Mac"
+  icon="download"
+  href="https://github.com/JerryZLiu/Dayflow/releases/latest"
+  horizontal
+>
+  Get the latest Dayflow.dmg from GitHub Releases
+</Card>
+
+## Why Dayflow?
+
+Dayflow was built on the principle that your calendar isn't the source of truth for how you actually spend your time—your screen is. It provides a calm, trustworthy timeline that lets you see your workday without turning into yet another dashboard you have to maintain.
+
+**Privacy-minded by design**: You choose your AI provider. Use **Gemini** (bring your own API key), **local models** (Ollama / LM Studio), or **ChatGPT/Claude** (requires paid subscription).
+
+## Key features
+
+<Columns cols={2}>
+  <Card
+    title="Automatic timeline"
+    icon="clock"
+  >
+    Get concise summaries of your day with 15-minute analysis intervals
+  </Card>
+  <Card
+    title="1 FPS recording"
+    icon="video"
+  >
+    Minimal CPU and storage impact with efficient screen capture
+  </Card>
+  <Card
+    title="Watch timelapses"
+    icon="film"
+  >
+    Review your entire day in fast-forward
+  </Card>
+  <Card
+    title="Auto storage cleanup"
+    icon="hard-drive"
+  >
+    Configurable storage limits (1GB–20GB or unlimited)
+  </Card>
+  <Card
+    title="Distraction highlights"
+    icon="eye"
+  >
+    See what pulled you off-task throughout the day
+  </Card>
+  <Card
+    title="Timeline export"
+    icon="file-export"
+  >
+    Export your timeline as Markdown for any date range
+  </Card>
+</Columns>
+
+## Get started
+
+<Card
+  title="Quickstart"
   icon="rocket"
   href="/quickstart"
   horizontal
 >
-  Follow our three step quickstart guide.
+  Install Dayflow and start tracking your day in minutes
 </Card>
 
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
+## Learn more
 
 <Columns cols={2}>
   <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
+    title="Installation"
+    icon="download"
+    href="/installation"
   >
-    Edit your docs locally and preview them in real time.
+    Detailed installation instructions for all methods
   </Card>
   <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
+    title="Features"
+    icon="sparkles"
+    href="/features"
   >
-    Customize the design and colors of your site to match your brand.
-  </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+    Explore all of Dayflow's capabilities
   </Card>
   <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
+    title="Privacy & data"
+    icon="shield"
+    href="/privacy"
   >
-    Auto-generate API documentation from OpenAPI specifications.
+    Understand how Dayflow handles your data
+  </Card>
+  <Card
+    title="AI providers"
+    icon="brain"
+    href="/ai-providers"
+  >
+    Configure Gemini, local models, or ChatGPT/Claude
   </Card>
 </Columns>
-
-## Create beautiful pages
-
-Everything you need to create world-class documentation.
-
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
-
-## Need inspiration?
-
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
