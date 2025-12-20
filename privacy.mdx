@@ -1,0 +1,332 @@
+---
+title: "Privacy & data"
+description: "Understand how Dayflow handles your data"
+---
+
+## Overview
+
+Dayflow is designed with privacy in mind. You control where your data goes and which AI provider processes it. This page explains what data is stored locally, what leaves your machine, and how different provider choices affect your privacy.
+
+## Data storage locations
+
+All Dayflow data is stored locally on your Mac in:
+
+```
+~/Library/Application Support/Dayflow/
+```
+
+### What's stored
+
+<AccordionGroup>
+  <Accordion title="Recordings (video chunks)">
+    **Location**: `Dayflow/recordings/` (or use "Open Recordings..." from menu bar)
+    
+    **Format**: 1 FPS screen capture in 15-second chunks
+    
+    **Retention**: Based on your configured storage limit (1GB–20GB or unlimited)
+    
+    **Cleanup**: Automatically purged when storage limit is reached
+  </Accordion>
+  
+  <Accordion title="Local database">
+    **Location**: `Dayflow/chunks.sqlite`
+    
+    **Contents**: Timeline cards, activity summaries, timestamps, categories
+    
+    **Size**: Typically a few MB
+  </Accordion>
+  
+  <Accordion title="Application preferences">
+    **Location**: Standard macOS preferences (`~/Library/Preferences/`)
+    
+    **Contents**: App settings, AI provider configuration, storage preferences
+  </Accordion>
+</AccordionGroup>
+
+### Reset or purge data
+
+To completely remove all Dayflow data:
+
+<Steps>
+  <Step title="Quit Dayflow">
+    Right-click the menu bar icon and select **Quit Dayflow**
+  </Step>
+  <Step title="Delete data folder">
+    ```bash
+    rm -rf ~/Library/Application\ Support/Dayflow/
+    ```
+  </Step>
+  <Step title="Relaunch">
+    Open Dayflow to start fresh with empty recordings and database
+  </Step>
+</Steps>
+
+<Warning>
+  This permanently deletes all recordings, timeline data, and analysis artifacts. This action cannot be undone.
+</Warning>
+
+## AI provider privacy
+
+Your choice of AI provider determines where your screen data is processed and how it's used.
+
+<Tabs>
+  <Tab title="Gemini (cloud)">
+    ### Gemini privacy
+    
+    When you use Gemini, Dayflow sends video chunks to **Google's Gemini API** for analysis.
+    
+    #### What's sent
+    - Screen recording video chunks (every 15 minutes)
+    - Analysis prompts
+    - No personally identifiable information beyond what's visible on your screen
+    
+    #### Google's data usage
+    
+    **Short answer**: There is a way to prevent Google from training on your data.
+    
+    If you **enable Cloud Billing** on **at least one** Gemini API project, Google treats **all of your Gemini API and Google AI Studio usage** under the **"Paid Services"** data-use rules — **even when you're using unpaid/free quota**.
+    
+    Under Paid Services, **Google does not use your prompts/responses to improve Google products/models**.
+    
+    <Note>
+      **Source**: [Gemini API Additional Terms](https://ai.google.dev/gemini-api/terms#paid-services-how-google-uses-your-data)
+      
+      "When you activate a Cloud Billing account, all use of Gemini API and Google AI Studio is a 'Paid Service' with respect to how Google Uses Your Data, even when using Services that are offered free of charge."
+    </Note>
+    
+    #### Important nuances
+    
+    <AccordionGroup>
+      <Accordion title="Abuse monitoring">
+        Even under Paid Services, Google **logs prompts/responses for a limited period** for **policy enforcement and legal compliance**.
+        
+        This is separate from training and is used to prevent abuse.
+      </Accordion>
+      
+      <Accordion title="EEA/UK/Switzerland users">
+        If you're in the EEA, UK, or Switzerland, the **Paid-style data handling applies by default** to **all Services** (including AI Studio and unpaid quota) **even without billing**.
+      </Accordion>
+      
+      <Accordion title="AI Studio is still free">
+        Enabling billing changes **data handling**, not whether Studio charges you. You can still use free quota with Paid Services data protection.
+        
+        **Source**: [Gemini API Pricing](https://ai.google.dev/gemini-api/docs/pricing)
+      </Accordion>
+      
+      <Accordion title="Checking your plan">
+        In **AI Studio → API keys**, you'll typically see "Plan: Paid" once billing is enabled on any linked project.
+      </Accordion>
+    </AccordionGroup>
+    
+    #### Recommendations
+    
+    <Steps>
+      <Step title="Enable Cloud Billing">
+        Create a Google Cloud project and enable billing (even if you don't plan to exceed free quota)
+      </Step>
+      <Step title="Verify plan status">
+        Check AI Studio to confirm "Plan: Paid" is shown
+      </Step>
+      <Step title="Use your API key">
+        Your Gemini API usage now falls under Paid Services data protection
+      </Step>
+    </Steps>
+    
+    <Warning>
+      This is an interpretation of Google's Terms of Service, not legal advice. Review the [official terms](https://ai.google.dev/gemini-api/terms) yourself.
+    </Warning>
+  </Tab>
+  
+  <Tab title="Local models">
+    ### Local model privacy
+    
+    When you use local models (Ollama or LM Studio), **all processing happens on your Mac**. No data leaves your machine.
+    
+    #### What stays local
+    - Screen recordings
+    - All AI inference
+    - Timeline generation
+    - Analysis results
+    
+    #### Privacy guarantees
+    
+    <Check>**Complete privacy**: No data sent to external servers</Check>
+    <Check>**Offline operation**: Works without internet (after model download)</Check>
+    <Check>**Full control**: You own and control all data</Check>
+    
+    #### Trade-offs
+    
+    <Warning>
+      **Performance**: Local models are GPU-intensive and will drain battery faster
+      
+      **Quality**: May underperform cloud models on complex summarization
+      
+      **Setup**: Requires downloading large model files (several GB)
+    </Warning>
+    
+    #### Recommended for
+    - Privacy-conscious users
+    - Users with sensitive screen content
+    - Users who want complete data ownership
+    - Users with powerful Macs (M1/M2/M3 with 16GB+ RAM)
+    
+    #### References
+    - [LM Studio offline mode](https://lmstudio.ai/docs/app/offline)
+    - [Ollama GPU acceleration](https://github.com/ollama/ollama/blob/main/docs/gpu.md)
+  </Tab>
+  
+  <Tab title="ChatGPT/Claude">
+    ### ChatGPT/Claude privacy
+    
+    When you use ChatGPT or Claude via CLI, your screen data is processed by **OpenAI** or **Anthropic** respectively.
+    
+    #### What's sent
+    - Extracted frames from your screen recordings
+    - Analysis prompts
+    - No personally identifiable information beyond what's visible on your screen
+    
+    #### Requirements
+    - **ChatGPT**: Active ChatGPT Plus or Pro subscription ($20+/month)
+    - **Claude**: Active Claude Pro subscription ($20/month)
+    - **Internet**: Active connection required (no offline mode)
+    
+    #### Data usage
+    
+    Review the privacy policies for your chosen provider:
+    - [OpenAI Privacy Policy](https://openai.com/policies/privacy-policy)
+    - [Anthropic Privacy Policy](https://www.anthropic.com/privacy)
+    
+    #### Benefits
+    
+    <Check>**Highest quality**: Frontier reasoning models provide best-in-class summaries</Check>
+    <Check>**Efficient**: Fewer API calls than local models</Check>
+    <Check>**Reliable**: Consistent performance and availability</Check>
+    
+    #### Trade-offs
+    
+    <Warning>
+      **Cost**: Requires paid subscription ($20/month)
+      
+      **Privacy**: Data processed by third-party AI provider
+      
+      **Internet**: Requires active connection
+    </Warning>
+  </Tab>
+</Tabs>
+
+## macOS permissions
+
+Dayflow requires the **Screen & System Audio Recording** permission to function.
+
+### What this permission allows
+
+- Capture screenshots at 1 FPS
+- Record system audio (optional, for future features)
+- Create timeline of your screen activity
+
+### How to review or revoke
+
+<Steps>
+  <Step title="Open System Settings">
+    Navigate to **System Settings → Privacy & Security**
+  </Step>
+  <Step title="Select Screen Recording">
+    Click **Screen & System Audio Recording** in the sidebar
+  </Step>
+  <Step title="Manage Dayflow">
+    Toggle Dayflow on or off, or remove it entirely
+  </Step>
+</Steps>
+
+**Apple's documentation**: [Control access to screen and system audio recording](https://support.apple.com/guide/mac-help/control-access-screen-system-audio-recording-mchld6aa7d23/mac)
+
+## Network activity
+
+Dayflow's network activity depends on your AI provider choice:
+
+<Tabs>
+  <Tab title="Gemini">
+    - **Outbound**: Video chunks sent to `generativelanguage.googleapis.com` every 15 minutes
+    - **Inbound**: Timeline analysis results from Gemini API
+    - **Updates**: Daily check for app updates via Sparkle (can be disabled)
+  </Tab>
+  
+  <Tab title="Local">
+    - **Outbound**: Requests to local server (e.g., `localhost:11434` for Ollama)
+    - **Inbound**: Analysis results from local server
+    - **Updates**: Daily check for app updates via Sparkle (can be disabled)
+    - **No external AI calls**: All inference happens locally
+  </Tab>
+  
+  <Tab title="ChatGPT/Claude">
+    - **Outbound**: Frames sent to OpenAI or Anthropic via CLI
+    - **Inbound**: Analysis results from AI provider
+    - **Updates**: Daily check for app updates via Sparkle (can be disabled)
+  </Tab>
+</Tabs>
+
+## Analytics
+
+Dayflow includes **optional** analytics to help improve the app. You can opt out at any time in settings.
+
+### What's collected (if enabled)
+
+- App version and macOS version
+- Feature usage (e.g., "timeline exported", "recording started")
+- Error logs and crash reports
+- Hardware info (CPU, RAM, GPU type)
+
+### What's NOT collected
+
+- Screen content or recordings
+- Timeline data or summaries
+- Personal information
+- API keys or credentials
+
+### Opt out
+
+Go to **Dayflow Settings → Privacy** and disable **Send anonymous usage data**.
+
+## Security best practices
+
+<CardGroup cols={2}>
+  <Card title="Secure your API keys" icon="key">
+    Store API keys in Dayflow's secure keychain storage, not in plain text files
+  </Card>
+  <Card title="Use Cloud Billing" icon="shield">
+    Enable Google Cloud Billing to prevent training on your Gemini data
+  </Card>
+  <Card title="Review recordings" icon="eye">
+    Periodically check your recordings folder to see what's being captured
+  </Card>
+  <Card title="Set storage limits" icon="hard-drive">
+    Configure auto-cleanup to prevent unlimited storage growth
+  </Card>
+  <Card title="Use local models" icon="server">
+    For maximum privacy, use Ollama or LM Studio for on-device processing
+  </Card>
+  <Card title="Pause when needed" icon="pause">
+    Stop recording during sensitive activities (banking, passwords, etc.)
+  </Card>
+</CardGroup>
+
+## Open source transparency
+
+Dayflow is **fully open source** under the MIT License. You can:
+
+- Review the entire codebase on [GitHub](https://github.com/JerryZLiu/Dayflow)
+- Verify what data is collected and where it's sent
+- Build from source to ensure no modifications
+- Contribute improvements or security fixes
+
+<Note>
+  Anything that watches your screen all day should be completely transparent about what it does with that information.
+</Note>
+
+## Questions?
+
+If you have privacy concerns or questions not covered here:
+
+- Open an issue on [GitHub](https://github.com/JerryZLiu/Dayflow/issues)
+- Review the [source code](https://github.com/JerryZLiu/Dayflow)
+- Check the [LICENSE](https://github.com/JerryZLiu/Dayflow/blob/main/LICENSE) file

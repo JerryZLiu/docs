@@ -1,0 +1,420 @@
+---
+title: "Features"
+description: "Explore everything Dayflow can do"
+---
+
+## Overview
+
+Dayflow automatically tracks your screen activity and generates a timeline with AI-powered summaries. This page covers all features and how to use them.
+
+## Core features
+
+### Automatic timeline
+
+Dayflow records your screen at 1 FPS and analyzes it every 15 minutes to create timeline cards.
+
+<img
+  src="https://raw.githubusercontent.com/JerryZLiu/dayflow/main/docs/images/hero_animation_1080p.gif"
+  alt="Dayflow timeline"
+  width="800"
+/>
+
+**How it works**:
+1. Screen captured at 1 FPS in 15-second chunks
+2. Every 15 minutes, recent footage is sent to your AI provider
+3. AI generates timeline cards with activity summaries
+4. Cards appear in your timeline with timestamps and categories
+
+**Timeline cards include**:
+- Activity title and description
+- Start and end time
+- Duration
+- Category (work, personal, distractions)
+- App icons and context
+
+### Watch timelapses
+
+Review your entire day in fast-forward by watching timelapse videos of your screen activity.
+
+**To watch a timelapse**:
+1. Click on any timeline card
+2. Click the **Play** button
+3. Watch your screen activity for that time period
+
+**Timelapse features**:
+- Adjustable playback speed
+- Scrub through timeline
+- Jump to specific moments
+- Full-screen mode
+
+<Tip>
+  Timelapses are great for remembering what you worked on or finding when you saw something specific.
+</Tip>
+
+### Distraction tracking
+
+Dayflow automatically identifies when you get distracted and highlights it in your timeline.
+
+**What counts as a distraction**:
+- Social media (Twitter, Reddit, Instagram, etc.)
+- Entertainment sites (YouTube, Netflix, etc.)
+- News sites
+- Messaging apps (when not work-related)
+
+**Distraction insights**:
+- Total distraction time per day
+- Most common distractions
+- Distraction patterns by time of day
+- Distraction-free focus periods
+
+<Note>
+  You can customize what counts as a distraction in settings.
+</Note>
+
+### Timeline export
+
+Export your timeline as Markdown for any date range.
+
+**To export**:
+1. Click the **Export** button in the timeline view
+2. Select date range
+3. Choose format (Markdown, CSV, or JSON)
+4. Save to file
+
+**Export includes**:
+- All timeline cards with timestamps
+- Activity summaries
+- Categories and tags
+- Duration for each activity
+
+**Use cases**:
+- Weekly reports for managers
+- Personal productivity tracking
+- Time tracking for clients
+- Journaling and reflection
+
+### Auto storage cleanup
+
+Dayflow automatically manages storage to prevent unlimited growth.
+
+**Storage settings**:
+- Set limit: 1GB to 20GB, or unlimited
+- Auto-cleanup: Removes oldest recordings when limit is reached
+- Manual cleanup: Delete recordings older than X days
+
+**Storage locations**:
+- Recordings: `~/Library/Application Support/Dayflow/recordings/`
+- Database: `~/Library/Application Support/Dayflow/chunks.sqlite`
+
+**To configure**:
+1. Open Dayflow settings
+2. Go to **Storage** tab
+3. Set your preferred limit
+4. Enable/disable auto-cleanup
+
+<Warning>
+  Deleted recordings cannot be recovered. Timeline cards remain, but you won't be able to watch timelapses for deleted periods.
+</Warning>
+
+## Daily journal (beta)
+
+Set intentions, reflect on your day, and get AI-generated summaries of your activity.
+
+<img
+  src="https://raw.githubusercontent.com/JerryZLiu/dayflow/main/docs/images/JournalPreview.png"
+  alt="Dayflow journal"
+  width="800"
+/>
+
+<Note>
+  Journal is currently in beta with limited access. Enter your access code in the app to unlock it.
+</Note>
+
+### Morning intentions
+
+Plan what you want to accomplish each day.
+
+**To set intentions**:
+1. Open the Journal tab
+2. Click **Set Intentions**
+3. Write what you want to accomplish today
+4. Save
+
+**Features**:
+- Free-form text entry
+- AI suggestions based on past patterns
+- Reminder notifications (configurable)
+- Review at end of day
+
+### Evening reflections
+
+Review how your day actually went compared to your intentions.
+
+**To reflect**:
+1. Open the Journal tab
+2. Click **Reflect on Day**
+3. Review your timeline and intentions
+4. Write your reflection
+5. Save
+
+**Features**:
+- Side-by-side view of intentions and actual timeline
+- AI-generated summary of your day
+- Highlight accomplishments and distractions
+- Track patterns over time
+
+### AI summaries
+
+Get automatic summaries of your day based on your timeline.
+
+**Summary includes**:
+- Total productive time
+- Main activities and projects
+- Distraction time and patterns
+- Focus periods
+- Comparison to intentions
+
+### Scheduled reminders
+
+Set up notifications to remind you to set intentions and reflect.
+
+**To configure**:
+1. Open Dayflow settings
+2. Go to **Journal** tab
+3. Enable reminders
+4. Set times for morning and evening notifications
+
+**Reminder options**:
+- Morning intentions: 8:00 AM (default)
+- Evening reflections: 6:00 PM (default)
+- Custom times
+- Skip weekends
+
+### Weekly view
+
+See patterns across your week.
+
+**Weekly insights**:
+- Total productive time per day
+- Distraction trends
+- Most productive days
+- Focus time patterns
+- Intention completion rate
+
+## Recording controls
+
+### Start/stop recording
+
+Control when Dayflow records your screen.
+
+**From menu bar**:
+1. Click the Dayflow icon
+2. Select **Start Recording** or **Stop Recording**
+
+**From main window**:
+- Toggle the recording switch in the top-right corner
+
+**From automation**:
+- Use URL schemes: `dayflow://start-recording` or `dayflow://stop-recording`
+- See [Automation](/automation) for details
+
+<Tip>
+  Stop recording during sensitive activities like banking or entering passwords.
+</Tip>
+
+### Pause manager
+
+Automatically pause recording during inactivity.
+
+**To configure**:
+1. Open Dayflow settings
+2. Go to **Recording** tab
+3. Enable **Pause on inactivity**
+4. Set inactivity threshold (default: 5 minutes)
+
+**How it works**:
+- Detects when you haven't interacted with your Mac
+- Automatically pauses recording after threshold
+- Resumes when you return
+
+### Active display tracking
+
+Dayflow only records the display you're actively using.
+
+**Multi-monitor support**:
+- Automatically detects which display has focus
+- Only records the active display
+- Switches seamlessly between displays
+
+## Categories
+
+Organize your timeline with custom categories.
+
+### Default categories
+
+- **Work**: Professional activities
+- **Personal**: Personal projects and activities
+- **Distractions**: Social media, entertainment, etc.
+
+### Custom categories
+
+Create your own categories to organize your timeline.
+
+**To create a category**:
+1. Open Dayflow settings
+2. Go to **Categories** tab
+3. Click **Add Category**
+4. Set name, color, and rules
+5. Save
+
+**Category rules**:
+- App-based: Categorize by application
+- URL-based: Categorize by website domain
+- Keyword-based: Categorize by window title keywords
+- Time-based: Categorize by time of day
+
+### Category editing
+
+Edit timeline cards to change their category.
+
+**To edit**:
+1. Click on a timeline card
+2. Click the category dropdown
+3. Select a new category
+4. Changes are saved automatically
+
+## Dashboard (coming soon)
+
+Ask any question about your workday and track trends over time.
+
+<img
+  src="https://raw.githubusercontent.com/JerryZLiu/dayflow/main/docs/images/DashboardPreview.png"
+  alt="Dayflow dashboard preview"
+  width="800"
+/>
+
+**Planned features**:
+- Custom questions and metrics
+- Drag-and-drop tile arrangement
+- Trend visualization
+- Goal tracking
+- Productivity insights
+
+## Settings
+
+### General
+
+- **Launch at login**: Start Dayflow automatically when you log in
+- **Show in menu bar**: Display Dayflow icon in menu bar
+- **Check for updates**: Automatically check for app updates
+
+### Recording
+
+- **Frame rate**: 1 FPS (fixed)
+- **Analysis interval**: 15 minutes (fixed)
+- **Pause on inactivity**: Auto-pause after X minutes
+- **Recording location**: Choose where to store recordings
+
+### Storage
+
+- **Storage limit**: 1GB to 20GB, or unlimited
+- **Auto-cleanup**: Remove old recordings automatically
+- **Manual cleanup**: Delete recordings older than X days
+
+### AI Provider
+
+- **Provider**: Gemini, Local, ChatGPT, or Claude
+- **API key**: For Gemini
+- **Endpoint**: For local models
+- **Model**: For local models
+
+### Categories
+
+- **Manage categories**: Create, edit, delete categories
+- **Category rules**: Set up automatic categorization
+- **Default category**: Set default for uncategorized activities
+
+### Journal
+
+- **Enable journal**: Turn journal feature on/off
+- **Morning reminder**: Set time for intention reminder
+- **Evening reminder**: Set time for reflection reminder
+- **Skip weekends**: Don't send reminders on weekends
+
+### Privacy
+
+- **Send analytics**: Share anonymous usage data
+- **Crash reports**: Send crash reports to help improve Dayflow
+
+## Keyboard shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `⌘ + ,` | Open settings |
+| `⌘ + R` | Toggle recording |
+| `⌘ + E` | Export timeline |
+| `⌘ + J` | Open journal |
+| `⌘ + W` | Close window |
+| `⌘ + Q` | Quit Dayflow |
+
+## Menu bar
+
+Click the Dayflow icon in your menu bar to access:
+
+- **Open Dayflow**: Show main window
+- **Start/Stop Recording**: Toggle recording
+- **Open Recordings**: View recording files
+- **Settings**: Open settings window
+- **Check for Updates**: Manually check for updates
+- **Quit Dayflow**: Exit the app
+
+## Auto-updates
+
+Dayflow uses Sparkle for automatic updates.
+
+**Update settings**:
+- **Auto-check**: Daily check for updates (default: enabled)
+- **Auto-download**: Download updates in background (default: enabled)
+- **Auto-install**: Install updates on quit (default: disabled)
+
+**To manually check**:
+1. Click menu bar icon
+2. Select **Check for Updates**
+
+**Update process**:
+1. Dayflow checks for updates daily
+2. If update available, downloads in background
+3. Notifies you when ready to install
+4. Install on next quit or manually
+
+## Debug tools
+
+Access debug information from the menu bar.
+
+**Debug menu**:
+- **View Logs**: See app logs
+- **Test AI Connection**: Verify AI provider setup
+- **Clear Cache**: Clear thumbnail cache
+- **Reset Database**: Reset timeline database (destructive)
+- **Open Data Folder**: View all Dayflow data
+
+<Warning>
+  Debug tools are for troubleshooting. Some actions (like Reset Database) are destructive and cannot be undone.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Automation" icon="robot" href="/automation">
+    Control Dayflow with URL schemes and Shortcuts
+  </Card>
+  <Card title="Privacy" icon="shield" href="/privacy">
+    Understand how your data is handled
+  </Card>
+  <Card title="AI providers" icon="brain" href="/ai-providers">
+    Configure your AI provider
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Get started with Dayflow
+  </Card>
+</CardGroup>

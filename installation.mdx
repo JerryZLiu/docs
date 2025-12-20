@@ -1,0 +1,264 @@
+---
+title: "Installation"
+description: "Install Dayflow on macOS"
+---
+
+## Requirements
+
+- **macOS 13.0+** (Ventura or later)
+- **Xcode 15+** (for building from source)
+- **AI provider** (optional): Gemini API key, local model server, or ChatGPT/Claude subscription
+
+## Installation methods
+
+Choose the installation method that works best for you.
+
+<Tabs>
+  <Tab title="Download (recommended)">
+    ### Install from releases
+    
+    The easiest way to install Dayflow for end users.
+    
+    <Steps>
+      <Step title="Download the DMG">
+        Get the latest `Dayflow.dmg` from [GitHub Releases](https://github.com/JerryZLiu/Dayflow/releases/latest).
+      </Step>
+      <Step title="Install the app">
+        1. Open the downloaded DMG file
+        2. Drag **Dayflow** into your **Applications** folder
+        3. Eject the DMG
+      </Step>
+      <Step title="Launch Dayflow">
+        Open Dayflow from Applications or Spotlight (⌘ + Space, then type "Dayflow").
+      </Step>
+      <Step title="Grant permissions">
+        When prompted, grant **Screen & System Audio Recording** permission:
+        
+        **System Settings → Privacy & Security → Screen & System Audio Recording → Enable Dayflow**
+      </Step>
+    </Steps>
+    
+    <Card
+      title="Download for Mac"
+      icon="download"
+      href="https://github.com/JerryZLiu/Dayflow/releases/latest"
+      horizontal
+    >
+      Get the latest Dayflow.dmg
+    </Card>
+  </Tab>
+  
+  <Tab title="Homebrew">
+    ### Install with Homebrew
+    
+    If you use [Homebrew](https://brew.sh/), you can install Dayflow with a single command.
+    
+    ```bash
+    brew install --cask dayflow
+    ```
+    
+    <Steps>
+      <Step title="Install Homebrew">
+        If you don't have Homebrew installed:
+        
+        ```bash
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        ```
+      </Step>
+      <Step title="Install Dayflow">
+        ```bash
+        brew install --cask dayflow
+        ```
+      </Step>
+      <Step title="Launch and configure">
+        Open Dayflow from Applications and grant screen recording permission when prompted.
+      </Step>
+    </Steps>
+    
+    <Tip>Homebrew will automatically keep Dayflow updated when you run `brew upgrade`.</Tip>
+  </Tab>
+  
+  <Tab title="Build from source">
+    ### Build from source
+    
+    For developers who want to build Dayflow themselves or contribute to the project.
+    
+    <Steps>
+      <Step title="Clone the repository">
+        ```bash
+        git clone https://github.com/JerryZLiu/Dayflow.git
+        cd Dayflow
+        ```
+      </Step>
+      <Step title="Open in Xcode">
+        ```bash
+        open Dayflow.xcodeproj
+        ```
+      </Step>
+      <Step title="Configure signing">
+        1. Select the **Dayflow** target in Xcode
+        2. Go to **Signing & Capabilities**
+        3. Select your development team
+        4. Xcode will automatically manage signing
+      </Step>
+      <Step title="Set environment variables (optional)">
+        If using Gemini, add your API key to the Run scheme:
+        
+        1. **Product → Scheme → Edit Scheme**
+        2. Select **Run** in the sidebar
+        3. Go to **Arguments** tab
+        4. Under **Environment Variables**, add:
+           - Name: `GEMINI_API_KEY`
+           - Value: Your API key
+      </Step>
+      <Step title="Build and run">
+        Press **⌘ + R** or click the **Run** button in Xcode.
+      </Step>
+    </Steps>
+    
+    <Note>
+      Building from source requires Xcode 15+ and macOS 13+. The app will run on your Mac but won't auto-update unless you set up Sparkle signing.
+    </Note>
+  </Tab>
+</Tabs>
+
+## Post-installation setup
+
+After installing Dayflow, complete these steps to start tracking your day.
+
+### 1. Grant screen recording permission
+
+Dayflow needs permission to record your screen.
+
+<Steps>
+  <Step title="Open System Settings">
+    Navigate to **System Settings → Privacy & Security → Screen & System Audio Recording**
+  </Step>
+  <Step title="Enable Dayflow">
+    Toggle the switch next to **Dayflow** to enable it
+  </Step>
+  <Step title="Restart if needed">
+    You may need to restart Dayflow for the permission to take effect
+  </Step>
+</Steps>
+
+<Warning>
+  Without this permission, Dayflow cannot record your screen or create your timeline.
+</Warning>
+
+### 2. Configure AI provider
+
+Choose and configure your AI provider. See the [AI providers guide](/ai-providers) for detailed instructions.
+
+<CardGroup cols={3}>
+  <Card title="Gemini" icon="google">
+    Free API key, cloud-based, efficient
+  </Card>
+  <Card title="Local models" icon="server">
+    Privacy-first, on-device, no API key needed
+  </Card>
+  <Card title="ChatGPT/Claude" icon="robot">
+    Highest quality, requires paid subscription
+  </Card>
+</CardGroup>
+
+### 3. Configure storage (optional)
+
+Set your storage preferences in Dayflow settings:
+
+- **Storage limit**: 1GB to 20GB, or unlimited
+- **Recording location**: Default is `~/Library/Application Support/Dayflow/recordings/`
+- **Auto-cleanup**: Automatically removes old recordings when limit is reached
+
+## Verification
+
+Verify that Dayflow is working correctly:
+
+<Steps>
+  <Step title="Check menu bar icon">
+    You should see the Dayflow icon in your menu bar (top-right corner)
+  </Step>
+  <Step title="Verify recording">
+    Click the menu bar icon and select **Open Recordings** to see captured video chunks
+  </Step>
+  <Step title="Wait for analysis">
+    After 15 minutes, check the main window for your first timeline card
+  </Step>
+</Steps>
+
+## Uninstallation
+
+To completely remove Dayflow from your Mac:
+
+<Steps>
+  <Step title="Quit Dayflow">
+    Right-click the menu bar icon and select **Quit Dayflow**
+  </Step>
+  <Step title="Delete the app">
+    Move **Dayflow.app** from Applications to Trash
+  </Step>
+  <Step title="Remove data (optional)">
+    To delete all recordings and data:
+    
+    ```bash
+    rm -rf ~/Library/Application\ Support/Dayflow/
+    ```
+    
+    <Warning>This will permanently delete all your recordings and timeline data.</Warning>
+  </Step>
+  <Step title="Remove permission">
+    Go to **System Settings → Privacy & Security → Screen & System Audio Recording** and remove Dayflow from the list
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="App won't open or crashes on launch">
+    1. Make sure you're running macOS 13.0 or later
+    2. Try moving Dayflow to Trash and reinstalling
+    3. Check Console.app for crash logs (search for "Dayflow")
+  </Accordion>
+  
+  <Accordion title="Permission dialog doesn't appear">
+    1. Open **System Settings → Privacy & Security → Screen & System Audio Recording**
+    2. Manually add Dayflow by clicking the **+** button
+    3. Navigate to Applications and select Dayflow
+    4. Restart Dayflow
+  </Accordion>
+  
+  <Accordion title="Homebrew installation fails">
+    Update Homebrew and try again:
+    
+    ```bash
+    brew update
+    brew install --cask dayflow
+    ```
+    
+    If it still fails, use the DMG installation method instead.
+  </Accordion>
+  
+  <Accordion title="Build from source fails">
+    Common issues:
+    - **Signing error**: Select your development team in Signing & Capabilities
+    - **Swift version**: Ensure you have Xcode 15+ installed
+    - **Dependencies**: Clean build folder (⌘ + Shift + K) and rebuild
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Complete the setup and start using Dayflow
+  </Card>
+  <Card title="AI providers" icon="brain" href="/ai-providers">
+    Configure your preferred AI provider
+  </Card>
+  <Card title="Features" icon="sparkles" href="/features">
+    Explore what Dayflow can do
+  </Card>
+  <Card title="Privacy" icon="shield" href="/privacy">
+    Understand how your data is handled
+  </Card>
+</CardGroup>
